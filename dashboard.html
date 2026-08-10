@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Panitia Lomba HUT RI ke-81 - SDIT AL-IQRA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-teal: #1e5b5e;
+      --secondary-gold: #e0b034;
+      --accent-red: #ce1126;
+    }
+    .bg-teal-iqra { background-color: var(--primary-teal); }
+    .text-teal-iqra { color: var(--primary-teal); }
+    .bg-gold-iqra { background-color: var(--secondary-gold); }
+    .border-gold-iqra { border-color: var(--secondary-gold); }
+    @media print {
+      .no-print { display: none !important; }
+      body { background-color: #fff !important; }
+      .print-shadow-none { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen font-sans text-slate-800">
+
+  <!-- Header Banner -->
+  <header class="bg-teal-iqra text-white border-b-4 border-gold-iqra shadow-lg no-print">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-white p-1.5 rounded-full shadow">
+          <span class="bg-red-600 text-white font-bold text-xs px-2.5 py-1 rounded-full uppercase">HUT RI 81</span>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide">DASHBOARD PANITIA LOMBA</h1>
+          <p class="text-xs text-yellow-300">SDIT AL-IQRA TIRTAMULYA</p>
+        </div>
+      </div>
+      
+      <div class="flex gap-2">
+        <button onclick="fetchDashboardData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-lg flex items-center gap-1 shadow">
+          🔄 Refresh Data
+        </button>
+        <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-2 rounded-lg flex items-center gap-1 shadow">
+          🖨️ Cetak Rekap
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- Stat Ringkasan -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 no-print">
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Pendaftaran</p>
+          <h3 id="statTotalPendaftaran" class="text-3xl font-extrabold text-teal-iqra mt-1">0</h3>
+        </div>
+        <div class="text-3xl">📋</div>
+      </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Lomba Terfavorit</p>
+          <h3 id="statLombaFavorit" class="text-lg font-bold text-slate-800 mt-1">-</h3>
+        </div>
+        <div class="text-3xl">🏆</div>
+      </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Kapasitas Terisi</p>
+          <h3 id="statPersentaseKapasitas" class="text-3xl font-extrabold text-red-600 mt-1">0%</h3>
+        </div>
+        <div class="text-3xl">📊</div>
+      </div>
+    </div>
+
+    <!-- Monitoring Kuota Lomba -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 print-shadow-none">
+      <h2 class="text-lg font-bold text-teal-iqra border-b pb-2 mb-4 flex items-center justify-between">
+        <span>📊 Kuota Lomba per Rombel</span>
+        <span class="text-xs font-normal text-slate-500 no-print">*Persentase total pendaftaran masuk</span>
+      </h2>
+      <div id="kuotaGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Progress Bar Kuota akan diisi oleh JS -->
+      </div>
+    </div>
+
+    <!-- Tabel Data Pendaftaran -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 print-shadow-none">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-4">
+        <div>
+          <h2 class="text-lg font-bold text-teal-iqra">📝 Data Peserta Terdaftar</h2>
+          <p class="text-xs text-slate-500">Daftar lengkap pendaftar lomba per rombel</p>
+        </div>
+
+        <!-- Filter & Search -->
+        <div class="flex flex-wrap items-center gap-2 no-print">
+          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Cari nama/tim/rombel..." class="p-2 border rounded-lg text-xs w-40 md:w-52 outline-none focus:ring-2 focus:ring-teal-600">
+          
+          <select id="filterFase" onchange="applyFilters()" class="p-2 border rounded-lg text-xs outline-none focus:ring-2 focus:ring-teal-600">
+            <option value="">Semua Fase</option>
+            <option value="Fase A">Fase A</option>
+            <option value="Fase B">Fase B</option>
+            <option value="Fase C">Fase C</option>
+          </select>
+
+          <select id="filterLomba" onchange="applyFilters()" class="p-2 border rounded-lg text-xs outline-none focus:ring-2 focus:ring-teal-600">
+            <option value="">Semua Lomba</option>
+          </select>
+
+          <button onclick="exportToCSV()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold px-3 py-2 rounded-lg shadow">
+            📥 Export CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabel -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+              <th class="p-3">No</th>
+              <th class="p-3">Waktu</th>
+              <th class="p-3">Fase</th>
+              <th class="p-3">Rombel</th>
+              <th class="p-3">Jenis Lomba</th>
+              <th class="p-3">Nama Tim / Peserta</th>
+              <th class="p-3">Detail Anggota</th>
+            </tr>
+          </thead>
+          <tbody id="pendaftaranTableBody" class="divide-y divide-slate-200">
+            <tr>
+              <td colspan="7" class="text-center p-6 text-slate-400">Memuat data pendaftaran...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // MASUKKAN URL DEPLOYMENT GAS ANDA DI SINI
+    // ==========================================
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwjZuzw3VXus__vyWtwgh_WBZX_ON1HvBfESyHMEteyw2P1vhc_fvtHZA6I5iiArb9Y/exec";
+
+    let rawDataPendaftaran = [];
+    let masterLomba = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchDashboardData();
+    });
+
+    async function fetchDashboardData() {
+      try {
+        const [resLomba, resPendaftaran] = await Promise.all([
+          fetch(`${GAS_WEB_APP_URL}?action=getLomba`),
+          fetch(`${GAS_WEB_APP_URL}?action=getPendaftaran`)
+        ]);
+
+        masterLomba = await resLomba.json();
+        rawDataPendaftaran = await resPendaftaran.json();
+
+        populateLombaFilter();
+        renderKuotaGrid();
+        applyFilters();
+        calculateStats();
+
+      } catch (err) {
+        console.error("Gagal mengambil data dashboard:", err);
+        document.getElementById('pendaftaranTableBody').innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center p-6 text-red-500 font-semibold">
+              Gagal memuat data. Pastikan konstanta GAS_WEB_APP_URL di dalam script sudah diisi dengan benar.
+            </td>
+          </tr>`;
+      }
+    }
+
+    function populateLombaFilter() {
+      const select = document.getElementById('filterLomba');
+      select.innerHTML = '<option value="">Semua Lomba</option>';
+      masterLomba.forEach(l => {
+        select.innerHTML += `<option value="${l.id}">${l.nama}</option>`;
+      });
+    }
+
+    function renderKuotaGrid() {
+      const container = document.getElementById('kuotaGrid');
+      container.innerHTML = '';
+
+      masterLomba.forEach(lomba => {
+        const totalTerdaftar = rawDataPendaftaran.filter(p => p.lombaId === lomba.id).length;
+        
+        let totalTarget = lomba.maxPerRombel * (lomba.fase.includes('Fase A') && lomba.fase.includes('Fase B') ? 12 : 4);
+        if (lomba.id === 'L03') totalTarget = 100;
+
+        const percentage = Math.min(Math.round((totalTerdaftar / totalTarget) * 100), 100);
+        
+        let colorClass = "bg-teal-600";
+        if (percentage >= 80) colorClass = "bg-amber-500";
+        if (percentage >= 100) colorClass = "bg-red-600";
+
+        container.innerHTML += `
+          <div class="border rounded-lg p-3 bg-slate-50">
+            <div class="flex justify-between items-start mb-1">
+              <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${lomba.nama}</h4>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${colorClass} text-white">${totalTerdaftar} Terdaftar</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-2">${lomba.kategori} (${lomba.fase})</p>
+            <div class="w-full bg-slate-200 rounded-full h-2">
+              <div class="${colorClass} h-2 rounded-full" style="width: ${percentage}%"></div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function applyFilters() {
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const filterFase = document.getElementById('filterFase').value;
+      const filterLomba = document.getElementById('filterLomba').value;
+
+      const filtered = rawDataPendaftaran.filter(item => {
+        const matchSearch = (item.namaTimPeserta || '').toLowerCase().includes(searchQuery) || 
+                            (item.rombel || '').toLowerCase().includes(searchQuery) ||
+                            (item.anggotaDetail || '').toLowerCase().includes(searchQuery);
+        const matchFase = !filterFase || item.fase === filterFase;
+        const matchLomba = !filterLomba || item.lombaId === filterLomba;
+
+        return matchSearch && matchFase && matchLomba;
+      });
+
+      renderTable(filtered);
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById('pendaftaranTableBody');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center p-6 text-slate-400">Tidak ada data pendaftaran ditemukan.</td></tr>`;
+        return;
+      }
+
+      data.forEach((item, index) => {
+        const formattedDate = new Date(item.timestamp).toLocaleString('id-ID', {
+          day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+        });
+
+        tbody.innerHTML += `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 font-semibold text-slate-500">${index + 1}</td>
+            <td class="p-3 text-slate-500 whitespace-nowrap">${formattedDate}</td>
+            <td class="p-3"><span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-[10px] font-bold">${item.fase}</span></td>
+            <td class="p-3 font-bold text-slate-800">${item.rombel}</td>
+            <td class="p-3 text-teal-iqra font-medium">${item.namaLomba}</td>
+            <td class="p-3 font-semibold text-slate-800">${item.namaTimPeserta}</td>
+            <td class="p-3 text-slate-600">${item.anggotaDetail || '-'}</td>
+          </tr>`;
+      });
+    }
+
+    function calculateStats() {
+      document.getElementById('statTotalPendaftaran').innerText = rawDataPendaftaran.length;
+
+      const countMap = {};
+      rawDataPendaftaran.forEach(item => {
+        countMap[item.namaLomba] = (countMap[item.namaLomba] || 0) + 1;
+      });
+
+      let favLomba = '-';
+      let maxCount = 0;
+      for (const [nama, count] of Object.entries(countMap)) {
+        if (count > maxCount) {
+          maxCount = count;
+          favLomba = nama;
+        }
+      }
+      document.getElementById('statLombaFavorit').innerText = favLomba;
+
+      const estimatedTotalCapacity = 200;
+      const percentage = Math.min(Math.round((rawDataPendaftaran.length / estimatedTotalCapacity) * 100), 100);
+      document.getElementById('statPersentaseKapasitas').innerText = `${percentage}%`;
+    }
+
+    function exportToCSV() {
+      if (rawDataPendaftaran.length === 0) {
+        alert("Belum ada data untuk diekspor!");
+        return;
+      }
+
+      let csv = 'Timestamp,Fase,Rombel,ID Lomba,Nama Lomba,Nama Tim/Peserta,Detail Anggota\n';
+      rawDataPendaftaran.forEach(row => {
+        csv += `"${row.timestamp}","${row.fase}","${row.rombel}","${row.lombaId}","${row.namaLomba}","${row.namaTimPeserta}","${row.anggotaDetail}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Rekap_Pendaftaran_Lomba_HUT_RI_81_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
