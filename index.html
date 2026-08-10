@@ -1,418 +1,350 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gebyar Kemerdekaan - SD IT AL-IQRA</title>
-  <!-- Tailwind CSS CDN -->
+  <title>Pendaftaran Lomba HUT RI ke-81 - SDIT AL-IQRA</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandTeal: '#1F5A60',
+            brandGold: '#E3B333',
+            brandRed: '#DC2626'
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="bg-slate-100 min-h-screen text-gray-800 pb-12">
 
-  <!-- NAVBAR -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <!-- Header Banner dengan Kombinasi Warna Logo & Merah-Putih -->
+  <header class="bg-brandTeal text-white shadow-xl border-b-4 border-brandGold">
+    <div class="max-w-5xl mx-auto px-4 py-6 text-center flex flex-col items-center justify-center gap-2">
       <div class="flex items-center gap-3">
-        <span class="text-2xl">🇮🇩</span>
-        <div class="leading-tight">
-          <h1 class="font-extrabold text-red-600 text-lg">SD IT AL-IQRA</h1>
-          <p class="text-xs text-slate-500 font-semibold">Panitia Lomba 17 Agustus</p>
-        </div>
+        <span class="text-3xl">🇮🇩</span>
+        <h1 class="text-2xl md:text-3xl font-extrabold tracking-wider uppercase text-brandGold">SDIT AL-IQRA TIRTAMULYA</h1>
+        <span class="text-3xl">🇮🇩</span>
       </div>
-      <nav class="hidden md:flex gap-6 font-semibold text-sm text-slate-600">
-        <a href="#beranda" class="hover:text-red-600 transition">Beranda</a>
-        <a href="#lomba" class="hover:text-red-600 transition">Kategori Lomba</a>
-        <a href="#daftar" class="hover:text-red-600 transition">Pendaftaran</a>
-        <a href="#juara" class="hover:text-red-600 transition">Papan Skor</a>
-      </nav>
-      <a href="#daftar" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs md:text-sm px-4 py-2 rounded-full transition shadow-md shadow-red-200">
-        Daftar Sekarang
-      </a>
+      <h2 class="text-lg md:text-xl font-bold text-white">Formulir Pendaftaran Lomba HUT RI Ke-81</h2>
+      <p class="text-xs md:text-sm text-emerald-100">Sistem Pendaftaran Real-Time & Control Kuota Rombel</p>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="beranda" class="relative bg-gradient-to-b from-red-600 to-red-700 text-white py-16 px-4 text-center overflow-hidden">
-    <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-500/20 rounded-full blur-2xl"></div>
-    
-    <div class="max-w-3xl mx-auto relative z-10">
-      <span class="bg-red-800/60 text-white text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider border border-white/20">
-        Semarak HUT RI Ke-81
-      </span>
-      <h2 class="text-3xl md:text-5xl font-extrabold mt-4 mb-3 leading-tight">
-        Lomba Kemerdekaan <br><span class="text-yellow-300">SD IT AL-IQRA</span>
-      </h2>
-      <p class="text-red-100 text-sm md:text-base max-w-xl mx-auto mb-8">
-        Mari kembangkan semangat juang, ketangkasan, dan kebersamaan seluruh siswa-siswi SD IT AL-IQRA!
-      </p>
-      
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="#daftar" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
-          Ikuti Perlombaan
-        </a>
-        <a href="#lomba" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-xl backdrop-blur-sm transition">
-          Lihat Jenis Lomba
-        </a>
+  <main class="max-w-5xl mx-auto px-4 mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Form Pendaftaran -->
+    <div class="lg:col-span-7 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+      <div class="bg-brandRed p-4 text-white font-bold flex items-center justify-between">
+        <span class="flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> Form Pendaftaran</span>
+        <span class="text-xs bg-white/20 px-2.5 py-1 rounded-full">HUT RI 81</span>
+      </div>
+
+      <form id="formPendaftaran" onsubmit="submitForm(event)" class="p-6 space-y-5">
+        
+        <!-- Pilihan Kelas & Fase Auto-Detect -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pilih Rombel / Kelas <span class="text-brandRed">*</span></label>
+            <select id="kelas" onchange="onKelasChange()" required class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
+              <option value="">-- Pilih Kelas --</option>
+              <optgroup label="Fase A">
+                <option value="1A">Kelas 1A</option><option value="1B">Kelas 1B</option>
+                <option value="2A">Kelas 2A</option><option value="2B">Kelas 2B</option>
+              </optgroup>
+              <optgroup label="Fase B">
+                <option value="3A">Kelas 3A</option><option value="3B">Kelas 3B</option>
+                <option value="4A">Kelas 4A</option><option value="4B">Kelas 4B</option>
+              </optgroup>
+              <optgroup label="Fase C">
+                <option value="5A">Kelas 5A</option><option value="5B">Kelas 5B</option>
+                <option value="6A">Kelas 6A</option><option value="6B">Kelas 6B</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Fase Terdeteksi</label>
+            <input type="text" id="faseDisplay" readonly placeholder="Otomatis" class="w-full p-3 bg-gray-100 border rounded-xl text-sm font-bold text-brandTeal">
+          </div>
+        </div>
+
+        <!-- Pilihan Jenis Lomba -->
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Jenis Perlombaan <span class="text-brandRed">*</span></label>
+          <select id="lomba" onchange="renderDynamicInputs()" required disabled class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
+            <option value="">-- Pilih Kelas Terlebih Dahulu --</option>
+          </select>
+        </div>
+
+        <div id="infoLomba" class="hidden p-3 bg-amber-50 border-l-4 border-brandGold text-xs text-amber-900 rounded-r-xl"></div>
+
+        <!-- Form Dinamis berdasarkan Jenis Lomba -->
+        <div id="dynamicInputs" class="space-y-4"></div>
+
+        <button type="submit" id="btnSubmit" class="w-full bg-brandTeal hover:bg-emerald-900 text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-paper-plane text-brandGold"></i>
+          <span>Kirim Pendaftaran</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Panel Monitor Kuota Rombel -->
+    <div class="lg:col-span-5 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-fit">
+      <div class="bg-brandTeal p-4 text-white font-bold flex items-center justify-between border-b-2 border-brandGold">
+        <span class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-brandGold"></i> Monitor Kuota Rombel</span>
+        <span id="selectedKelasBadge" class="text-xs bg-brandGold text-gray-900 font-extrabold px-2.5 py-1 rounded-full">Pilih Kelas</span>
+      </div>
+
+      <div id="quotaPanel" class="p-4 space-y-3">
+        <p class="text-xs text-gray-400 text-center py-8">Pilih kelas pada form untuk melihat sisa kuota lomba rombel Anda secara langsung.</p>
       </div>
     </div>
-  </section>
-
-  <main class="max-w-6xl mx-auto px-4 py-12 space-y-16 flex-grow w-full">
-
-<!-- KATEGORI PERLOMBAAN -->
-    <section id="lomba">
-      <div class="text-center mb-8">
-        <span class="text-red-600 font-bold text-xs uppercase tracking-wider">Cabang Lomba</span>
-        <h3 class="text-2xl font-extrabold text-slate-900">Kategori & Cabang Perlombaan</h3>
-        <p class="text-slate-500 text-sm">Pilih dan daftarkan diri sesuai dengan Fase Kelas masing-masing</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Kartu 1: FASE A -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">🎨</span>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">Kelas 1A - 2B</span>
-            </div>
-            <h4 class="text-lg font-bold text-slate-900">Fase A</h4>
-            <p class="text-slate-500 text-xs mb-4">Lomba khusus siswa kelas bawah untuk melatih kreativitas & kordinasi.</p>
-            
-            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Individu)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Mewarnai</b> <span class="text-slate-400">(Individu)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-            </ul>
-          </div>
-          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
-            Daftar Fase A →
-          </a>
-        </div>
-
-        <!-- Kartu 2: FASE B -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">🥤</span>
-              <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">Kelas 3A - 4B</span>
-            </div>
-            <h4 class="text-lg font-bold text-slate-900">Fase B</h4>
-            <p class="text-slate-500 text-xs mb-4">Melatih kerja sama tim, fokus, dan ketangkasan kelompok.</p>
-            
-            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Memasukkan Sedotan ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-            </ul>
-          </div>
-          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
-            Daftar Fase B →
-          </a>
-        </div>
-
-        <!-- Kartu 3: FASE C -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">⚡</span>
-              <span class="text-xs font-bold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-md">Kelas 5A - 6B</span>
-            </div>
-            <h4 class="text-lg font-bold text-slate-900">Fase C</h4>
-            <p class="text-slate-500 text-xs mb-4">Adu kecepatan dan strategi tim untuk kelas atas.</p>
-            
-            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Memasukkan Sedotan ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-            </ul>
-          </div>
-          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
-            Daftar Fase C →
-          </a>
-        </div>
-
-        <!-- Kartu 4: SEMUA KELAS -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">🏆</span>
-              <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-md">Semua Kelas</span>
-            </div>
-            <h4 class="text-lg font-bold text-slate-900">Umum / Kebersamaan</h4>
-            <p class="text-slate-500 text-xs mb-4">Lomba seru yang dapat diikuti oleh seluruh jenjang siswa & orang tua.</p>
-            
-            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Menyuapi Orang Tua</b> <span class="text-slate-400">(Individu)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Lempar Tangkap</b> <span class="text-slate-400">(Individu)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Estafet Sarung</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><b>Volly</b> <span class="text-slate-400">(Tim)</span></span>
-              </li>
-            </ul>
-          </div>
-          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
-            Daftar Umum →
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FORMULIR PENDAFTARAN -->
-    <section id="daftar" class="bg-white rounded-3xl p-6 md:p-10 border border-slate-200/80 shadow-lg relative overflow-hidden">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-8">
-          <span class="text-red-600 font-bold text-xs uppercase tracking-wider">Formulir Online</span>
-          <h3 class="text-2xl font-extrabold text-slate-900">Pendaftaran Peserta</h3>
-          <p class="text-slate-500 text-sm mt-1">Isi data siswa dengan benar untuk mendaftar perlombaan.</p>
-        </div>
-
-        <form id="formPendaftaran" class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Lengkap Siswa</label>
-            <input type="text" id="nama" required placeholder="Contoh: Muhammad Fayyadh"
-              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition">
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kelas</label>
-              <select id="kelas" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition bg-white">
-                <option value="">-- Pilih Kelas --</option>
-                <option value="1A">Kelas 1A</option>
-                <option value="1B">Kelas 1B</option>
-                <option value="2A">Kelas 2A</option>
-                <option value="2B">Kelas 2B</option>
-                <option value="3A">Kelas 3A</option>
-                <option value="3B">Kelas 3B</option>
-                <option value="4A">Kelas 4A</option>
-                <option value="4B">Kelas 4B</option>
-                <option value="5A">Kelas 5A</option>
-                <option value="5B">Kelas 5B</option>
-                <option value="6A">Kelas 6A</option>
-                <option value="6B">Kelas 6B</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilihan Lomba</label>
-<select id="lombaPilihan" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition bg-white">
-  <option value="">-- Pilih Perlombaan --</option>
-  
-  <optgroup label="FASE A (Kelas 1A, 1B, 2A, 2B)">
-    <option value="Memasukkan Pensil ke Botol (Individu) - Fase A">Memasukkan Pensil ke Botol / Individu</option>
-    <option value="Mewarnai (Individu) - Fase A">Mewarnai / Individu</option>
-    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase A">Mengisi Air ke Botol Pakai Spons / Tim</option>
-  </optgroup>
-
-  <optgroup label="FASE B (Kelas 3A, 3B, 4A, 4B)">
-    <option value="Memasukkan Pensil ke Botol (Tim) - Fase B">Memasukkan Pensil ke Botol / Tim</option>
-    <option value="Memasukkan Sedotan ke Botol (Tim) - Fase B">Memasukkan Sedotan ke Botol / Tim</option>
-    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase B">Mengisi Air ke Botol Pakai Spons / Tim</option>
-  </optgroup>
-
-  <optgroup label="FASE C (Kelas 5A, 5B, 6A, 6B)">
-    <option value="Memasukkan Pensil ke Botol (Tim) - Fase C">Memasukkan Pensil ke Botol / Tim</option>
-    <option value="Memasukkan Sedotan ke Botol (Tim) - Fase C">Memasukkan Sedotan ke Botol / Tim</option>
-    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase C">Mengisi Air ke Botol Pakai Spons / Tim</option>
-  </optgroup>
-
-  <optgroup label="SEMUA KELAS">
-    <option value="Menyuapi Orang Tua (Individu) - Semua Kelas">Menyuapi Orang Tua / Individu</option>
-    <option value="Lempar Tangkap (Individu) - Semua Kelas">Lempar Tangkap / Individu</option>
-    <option value="Estafet Sarung (Tim) - Semua Kelas">Estafet Sarung / Tim</option>
-    <option value="Volly (Tim) - Semua Kelas">Volly / Tim</option>
-  </optgroup>
-</select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">No. WhatsApp Orang Tua</label>
-            <input type="tel" id="whatsapp" required placeholder="081234567890"
-              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition">
-          </div>
-
-          <button type="submit" id="btnSubmit"
-            class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-red-200 text-sm flex items-center justify-center gap-2 mt-2">
-            <span>Kirim Pendaftaran</span>
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- PAPAN SKOR & PEMENANG -->
-    <section id="juara" class="space-y-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
-        <div>
-          <span class="text-emerald-600 font-bold text-xs uppercase tracking-wider">Update Realtime</span>
-          <h3 class="text-2xl font-extrabold text-slate-900">Papan Skor & Pengumuman Juara</h3>
-        </div>
-        <button onclick="fetchJuaraData()" class="self-start md:self-auto text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-semibold transition">
-          🔄 Refresh Data
-        </button>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs">
-              <tr>
-                <th class="py-3 px-4">Lomba</th>
-                <th class="py-3 px-4">🥇 Juara 1</th>
-                <th class="py-3 px-4">🥈 Juara 2</th>
-                <th class="py-3 px-4">🥉 Juara 3</th>
-              </tr>
-            </thead>
-            <tbody id="tabelJuara" class="divide-y divide-slate-100 text-slate-700">
-              <tr>
-                <td colspan="4" class="py-6 text-center text-slate-400">Memuat data juara...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs">
-    <p>© 2026 Panitia Semarak Kemerdekaan RI SD IT AL-IQRA.</p>
-    <p class="mt-1 text-slate-500">Dibuat dengan semangat Proklamasi 🇲🇨</p>
-  </footer>
-
-  <!-- SCRIPT INTEGRASI SCRIPT GOOGLE APPS -->
   <script>
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP GOOGLE APPS SCRIPT KAMU NANTINYA!
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwsns92Bf0IUSlhWkZDAcSfDmeQqnxSmDCma41YF_RzKtxbSVnEVe5QB_EG5ld7QLrt/exec";
+    // PASTEKAN URL WEB APP GAS ANDA DI SINI
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLDDxl2lvw9UnRp91X_It5RKNGYCe_TMQPykVmOpk1mB4nAr_FR7YZWtXGMytbPmCc/exec";
 
-    // Handle Submit Form
-    document.getElementById("formPendaftaran").addEventListener("submit", function(e) {
-      e.preventDefault();
+    const dataLomba = {
+      "makan_kerupuk": { nama: "Lomba Makan Kerupuk (Individu)", jenis: "Individu", max: 2, unit: "Peserta", fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 2 orang per rombel." },
+      "pensil_botol_ind": { nama: "Lomba Memasukkan Pensil ke Botol (Individu)", jenis: "Individu", max: 3, unit: "Peserta", fase: ["Fase A"], info: "Maksimal 3 orang per rombel." },
+      "mewarnai": { nama: "Lomba Mewarnai (Individu)", jenis: "Individu", max: 999, unit: "Peserta", fase: ["Fase A"], info: "Diikuti seluruh siswa Fase A." },
+      "pindah_bendera": { nama: "Lomba Memindahkan Bendera (Individu)", jenis: "Individu", max: 3, unit: "Peserta", fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 3 orang per rombel." },
+      "pensil_botol_tim": { nama: "Memasukkan Pensil ke Botol (Tim)", jenis: "Tim", max: 1, unit: "Tim", anggota: 4, fase: ["Fase B", "Fase C"], info: "Maksimal 1 tim per rombel (4 orang/tim)." },
+      "sedotan_botol_tim": { nama: "Memasukkan Sedotan ke Botol (Tim)", jenis: "Tim", max: 2, unit: "Tim", anggota: 5, fase: ["Fase B", "Fase C"], info: "Maksimal 2 tim per rombel (5 orang/tim)." },
+      "spons_air_tim": { nama: "Mengisi Botol dengan Air pakai Spons (Tim)", jenis: "Tim", max: 2, unit: "Tim", anggota: 5, fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 2 tim per rombel (5 orang/tim)." }
+    };
+
+    let serverStats = {};
+
+    async function fetchStats() {
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=getStats`, { method: "GET", redirect: "follow" });
+        const json = await res.json();
+        if (json.result === "success") {
+          serverStats = json.stats || {};
+          updateQuotaPanel();
+          updateLombaOptions();
+        }
+      } catch (e) {
+        console.error("Gagal sinkronisasi kuota:", e);
+      }
+    }
+
+    function getFase(kelas) {
+      if (["1A", "1B", "2A", "2B"].includes(kelas)) return "Fase A";
+      if (["3A", "3B", "4A", "4B"].includes(kelas)) return "Fase B";
+      if (["5A", "5B", "6A", "6B"].includes(kelas)) return "Fase C";
+      return "";
+    }
+
+    async function onKelasChange() {
+      const kelas = document.getElementById("kelas").value;
+      const fase = getFase(kelas);
+      document.getElementById("faseDisplay").value = fase;
+      document.getElementById("selectedKelasBadge").textContent = kelas ? `Kelas ${kelas}` : 'Pilih Kelas';
+
+      if (kelas) {
+        updateLombaOptions();
+        await fetchStats();
+      } else {
+        document.getElementById("lomba").disabled = true;
+        document.getElementById("lomba").innerHTML = '<option value="">-- Pilih Kelas Terlebih Dahulu --</option>';
+        document.getElementById("dynamicInputs").innerHTML = '';
+        document.getElementById("infoLomba").classList.add("hidden");
+        updateQuotaPanel();
+      }
+    }
+
+    function updateLombaOptions() {
+      const kelas = document.getElementById("kelas").value;
+      const fase = getFase(kelas);
+      const lombaSelect = document.getElementById("lomba");
       
+      lombaSelect.innerHTML = '<option value="">-- Pilih Jenis Lomba --</option>';
+      document.getElementById("dynamicInputs").innerHTML = '';
+      document.getElementById("infoLomba").classList.add("hidden");
+
+      if (!fase) return;
+      lombaSelect.disabled = false;
+      
+      for (const [key, value] of Object.entries(dataLomba)) {
+        if (value.fase.includes(fase)) {
+          const filled = serverStats[`${kelas}_${value.nama}`] || 0;
+          const isFull = filled >= value.max;
+
+          const option = document.createElement("option");
+          option.value = key;
+          option.textContent = `${value.nama} ${isFull ? '(PENUH)' : ''}`;
+          if (isFull) {
+            option.disabled = true;
+            option.classList.add("text-brandRed", "bg-gray-100");
+          }
+          lombaSelect.appendChild(option);
+        }
+      }
+    }
+
+    function updateQuotaPanel() {
+      const kelas = document.getElementById("kelas").value;
+      const fase = getFase(kelas);
+      const panel = document.getElementById("quotaPanel");
+
+      if (!kelas) {
+        panel.innerHTML = `<p class="text-xs text-gray-400 text-center py-8">Pilih kelas pada form untuk melihat sisa kuota lomba rombel Anda secara langsung.</p>`;
+        return;
+      }
+
+      let html = '';
+      for (const [key, value] of Object.entries(dataLomba)) {
+        if (value.fase.includes(fase)) {
+          const filled = serverStats[`${kelas}_${value.nama}`] || 0;
+          const max = value.max;
+          const isUnlimited = max >= 999;
+          const isFull = filled >= max;
+
+          html += `
+            <div class="p-3 rounded-xl border ${isFull ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-gray-200'}">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs font-bold text-gray-800">${value.nama}</span>
+                ${isFull ? 
+                  `<span class="text-[10px] bg-brandRed text-white font-bold px-2 py-0.5 rounded-full">PENUH</span>` : 
+                  `<span class="text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">TERSEDIA</span>`
+                }
+              </div>
+              <div class="flex justify-between items-center text-xs text-gray-500">
+                <span>Terdaftar: <b class="${isFull ? 'text-brandRed' : 'text-brandTeal'}">${filled}</b> ${value.unit}</span>
+                <span>Kuota Rombel: <b>${isUnlimited ? 'Tanpa Batas' : max + ' ' + value.unit}</b></span>
+              </div>
+            </div>
+          `;
+        }
+      }
+      panel.innerHTML = html;
+    }
+
+    function renderDynamicInputs() {
+      const key = document.getElementById("lomba").value;
+      const container = document.getElementById("dynamicInputs");
+      const infoBox = document.getElementById("infoLomba");
+      container.innerHTML = '';
+
+      if (!key) {
+        infoBox.classList.add("hidden");
+        return;
+      }
+
+      const lomba = dataLomba[key];
+      infoBox.textContent = "Aturan Rombel: " + lomba.info;
+      infoBox.classList.remove("hidden");
+
+      if (lomba.jenis === "Individu") {
+        container.innerHTML = `
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Peserta <span class="text-brandRed">*</span></label>
+            <input type="text" name="namaUtama" required placeholder="Masukkan Nama Lengkap Peserta" class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
+          </div>
+        `;
+      } else {
+        let inputs = `
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Tim / Kelompok <span class="text-brandRed">*</span></label>
+            <input type="text" name="namaUtama" required placeholder="Contoh: Tim Rajawali / Kelompok 1" class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none mb-3">
+          </div>
+          <div class="p-4 bg-slate-50 border border-gray-200 rounded-xl space-y-3">
+            <p class="text-xs font-bold text-brandTeal uppercase">Daftar Anggota Tim (${lomba.anggota} Orang):</p>
+        `;
+        
+        for (let i = 1; i <= lomba.anggota; i++) {
+          inputs += `
+            <div>
+              <input type="text" name="anggotaInput" required placeholder="Nama Anggota ${i}" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-brandTeal outline-none">
+            </div>
+          `;
+        }
+        inputs += `</div>`;
+        container.innerHTML = inputs;
+      }
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
       const btn = document.getElementById("btnSubmit");
       btn.disabled = true;
-      btn.innerHTML = `<span>Mengirim...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Memproses...`;
+
+      const kelas = document.getElementById("kelas").value;
+      const fase = document.getElementById("faseDisplay").value;
+      const lombaKey = document.getElementById("lomba").value;
+      const lomba = dataLomba[lombaKey];
+
+      const namaUtama = document.querySelector('[name="namaUtama"]').value;
+      const anggotaElements = document.querySelectorAll('[name="anggotaInput"]');
+      let anggotaList = [];
+      anggotaElements.forEach(input => anggotaList.push(input.value));
 
       const payload = {
-        action: "register",
-        nama: document.getElementById("nama").value,
-        kelas: document.getElementById("kelas").value,
-        lomba: document.getElementById("lombaPilihan").value,
-        whatsapp: document.getElementById("whatsapp").value
+        kelas: kelas,
+        fase: fase,
+        lomba: lomba.nama,
+        kategori: lomba.jenis,
+        namaUtama: namaUtama,
+        anggota: anggotaList,
+        catatan: "-"
       };
 
-      fetch(GAS_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-      })
-      .then(res => res.json())
-      .then(data => {
-        if(data.status === "success") {
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        const json = await res.json();
+
+        if (json.result === "success") {
           Swal.fire({
             icon: 'success',
             title: 'Pendaftaran Berhasil!',
-            text: 'Data Ananda telah berhasil terdaftar di panitia.',
+            text: json.message,
+            confirmButtonColor: '#1F5A60'
+          });
+
+          document.getElementById("formPendaftaran").reset();
+          document.getElementById("lomba").disabled = true;
+          document.getElementById("dynamicInputs").innerHTML = '';
+          document.getElementById("infoLomba").classList.add("hidden");
+          
+          await onKelasChange();
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Pendaftaran Ditolak!',
+            text: json.message,
             confirmButtonColor: '#DC2626'
           });
-          document.getElementById("formPendaftaran").reset();
-        } else {
-          throw new Error(data.message);
+          await onKelasChange();
         }
-      })
-      .catch(err => {
+
+      } catch (err) {
         Swal.fire({
           icon: 'error',
-          title: 'Gagal Mendaftar',
-          text: 'Terjadi kesalahan atau koneksi terputus. Silakan coba lagi.',
+          title: 'Gagal!',
+          text: 'Koneksi ke server terganggu. Silakan coba lagi.',
           confirmButtonColor: '#DC2626'
         });
-      })
-      .finally(() => {
+      } finally {
         btn.disabled = false;
-        btn.innerHTML = `<span>Kirim Pendaftaran</span>`;
-      });
-    });
-
-    // Fetch Data Juara Realtime
-    function fetchJuaraData() {
-      const tabel = document.getElementById("tabelJuara");
-      
-      fetch(`${GAS_URL}?action=getJuara`)
-      .then(res => res.json())
-      .then(data => {
-        if(data.length === 0) {
-          tabel.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-slate-400">Belum ada data pengumuman juara.</td></tr>`;
-          return;
-        }
-        
-        let html = '';
-        data.forEach(item => {
-          html += `
-            <tr class="hover:bg-slate-50">
-              <td class="py-3 px-4 font-bold text-slate-900">${item.lomba}</td>
-              <td class="py-3 px-4 font-semibold text-amber-600">${item.juara1 || '-'}</td>
-              <td class="py-3 px-4 text-slate-600">${item.juara2 || '-'}</td>
-              <td class="py-3 px-4 text-slate-600">${item.juara3 || '-'}</td>
-            </tr>
-          `;
-        });
-        tabel.innerHTML = html;
-      })
-      .catch(() => {
-        tabel.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-slate-400">Gagal memuat data. Hubungkan backend Apps Script terlebih dahulu.</td></tr>`;
-      });
+        btn.innerHTML = `<i class="fa-solid fa-paper-plane text-brandGold"></i> <span>Kirim Pendaftaran</span>`;
+      }
     }
-
-    // Auto load data juara saat halaman dibuka
-    window.addEventListener("DOMContentLoaded", fetchJuaraData);
   </script>
 </body>
 </html>
