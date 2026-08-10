@@ -139,15 +139,34 @@
 
             <div>
               <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilihan Lomba</label>
-              <select id="lombaPilihan" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition bg-white">
-                <option value="">-- Pilih Perlombaan --</option>
-                <option value="Mewarnai">Mewarnai Kaligrafi (Kelas 1-3)</option>
-                <option value="Lari Kelereng">Lari Kelereng (Kelas 1-3)</option>
-                <option value="Tahfidz Qur'an">Tahfidz Qur'an (Kelas 4-6)</option>
-                <option value="Cerdas Cermat">Cerdas Cermat (Kelas 4-6)</option>
-                <option value="Makan Kerupuk">Makan Kerupuk (Semua Kelas)</option>
-                <option value="Balap Karung Helm">Balap Karung Helm (Semua Kelas)</option>
-              </select>
+<select id="lombaPilihan" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm transition bg-white">
+  <option value="">-- Pilih Perlombaan --</option>
+  
+  <optgroup label="FASE A (Kelas 1A, 1B, 2A, 2B)">
+    <option value="Memasukkan Pensil ke Botol (Individu) - Fase A">Memasukkan Pensil ke Botol / Individu</option>
+    <option value="Mewarnai (Individu) - Fase A">Mewarnai / Individu</option>
+    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase A">Mengisi Air ke Botol Pakai Spons / Tim</option>
+  </optgroup>
+
+  <optgroup label="FASE B (Kelas 3A, 3B, 4A, 4B)">
+    <option value="Memasukkan Pensil ke Botol (Tim) - Fase B">Memasukkan Pensil ke Botol / Tim</option>
+    <option value="Memasukkan Sedotan ke Botol (Tim) - Fase B">Memasukkan Sedotan ke Botol / Tim</option>
+    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase B">Mengisi Air ke Botol Pakai Spons / Tim</option>
+  </optgroup>
+
+  <optgroup label="FASE C (Kelas 5A, 5B, 6A, 6B)">
+    <option value="Memasukkan Pensil ke Botol (Tim) - Fase C">Memasukkan Pensil ke Botol / Tim</option>
+    <option value="Memasukkan Sedotan ke Botol (Tim) - Fase C">Memasukkan Sedotan ke Botol / Tim</option>
+    <option value="Mengisi Air ke Botol Pakai Spons (Tim) - Fase C">Mengisi Air ke Botol Pakai Spons / Tim</option>
+  </optgroup>
+
+  <optgroup label="SEMUA KELAS">
+    <option value="Menyuapi Orang Tua (Individu) - Semua Kelas">Menyuapi Orang Tua / Individu</option>
+    <option value="Lempar Tangkap (Individu) - Semua Kelas">Lempar Tangkap / Individu</option>
+    <option value="Estafet Sarung (Tim) - Semua Kelas">Estafet Sarung / Tim</option>
+    <option value="Volly (Tim) - Semua Kelas">Volly / Tim</option>
+  </optgroup>
+</select>
             </div>
           </div>
 
