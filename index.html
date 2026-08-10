@@ -67,37 +67,140 @@
 
   <main class="max-w-6xl mx-auto px-4 py-12 space-y-16 flex-grow w-full">
 
-    <!-- KATEGORI LOMBA -->
+<!-- KATEGORI PERLOMBAAN -->
     <section id="lomba">
       <div class="text-center mb-8">
-        <h3 class="text-2xl font-extrabold text-slate-900">Kategori Perlombaan</h3>
-        <p class="text-slate-500 text-sm">Pilih kategori lomba sesuai dengan jenjang kelas</p>
+        <span class="text-red-600 font-bold text-xs uppercase tracking-wider">Cabang Lomba</span>
+        <h3 class="text-2xl font-extrabold text-slate-900">Kategori & Cabang Perlombaan</h3>
+        <p class="text-slate-500 text-sm">Pilih dan daftarkan diri sesuai dengan Fase Kelas masing-masing</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Kartu Lomba 1 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">🎨</div>
-          <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Kelas 1 - 3</span>
-          <h4 class="text-lg font-bold text-slate-900 mt-2">Mewarnai & Lari Kelereng</h4>
-          <p class="text-slate-500 text-xs mt-1 leading-relaxed">Melatih kreativitas, fokus, dan keseimbangan motorik halus siswa-siswi kelas bawah.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Kartu 1: FASE A -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl">🎨</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">Kelas 1A - 2B</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Fase A</h4>
+            <p class="text-slate-500 text-xs mb-4">Lomba khusus siswa kelas bawah untuk melatih kreativitas & kordinasi.</p>
+            
+            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Individu)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Mewarnai</b> <span class="text-slate-400">(Individu)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+            </ul>
+          </div>
+          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
+            Daftar Fase A →
+          </a>
         </div>
 
-        <!-- Kartu Lomba 2 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">📖</div>
-          <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Kelas 4 - 6</span>
-          <h4 class="text-lg font-bold text-slate-900 mt-2">Tahfidz & Cerdas Cermat</h4>
-          <p class="text-slate-500 text-xs mt-1 leading-relaxed">Uji hafalan Al-Qur'an serta wawasan kebangsaan dan keislaman antar kelompok.</p>
+        <!-- Kartu 2: FASE B -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl">🥤</span>
+              <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">Kelas 3A - 4B</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Fase B</h4>
+            <p class="text-slate-500 text-xs mb-4">Melatih kerja sama tim, fokus, dan ketangkasan kelompok.</p>
+            
+            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Memasukkan Sedotan ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+            </ul>
+          </div>
+          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
+            Daftar Fase B →
+          </a>
         </div>
 
-        <!-- Kartu Lomba 3 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition">
-          <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">🏆</div>
-          <span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-md">Umum / Semua Kelas</span>
-          <h4 class="text-lg font-bold text-slate-900 mt-2">Lomba Ketangkasan</h4>
-          <p class="text-slate-500 text-xs mt-1 leading-relaxed">Estafet sarung, makan kerupuk, dan balap karung helm yang penuh keseruan.</p>
+        <!-- Kartu 3: FASE C -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl">⚡</span>
+              <span class="text-xs font-bold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-md">Kelas 5A - 6B</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Fase C</h4>
+            <p class="text-slate-500 text-xs mb-4">Adu kecepatan dan strategi tim untuk kelas atas.</p>
+            
+            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Memasukkan Pensil ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Memasukkan Sedotan ke Botol</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Mengisi Air Pakai Spons</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+            </ul>
+          </div>
+          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
+            Daftar Fase C →
+          </a>
         </div>
+
+        <!-- Kartu 4: SEMUA KELAS -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl">🏆</span>
+              <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-md">Semua Kelas</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Umum / Kebersamaan</h4>
+            <p class="text-slate-500 text-xs mb-4">Lomba seru yang dapat diikuti oleh seluruh jenjang siswa & orang tua.</p>
+            
+            <ul class="space-y-2 text-xs text-slate-700 border-t border-slate-100 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Menyuapi Orang Tua</b> <span class="text-slate-400">(Individu)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Lempar Tangkap</b> <span class="text-slate-400">(Individu)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Estafet Sarung</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">•</span>
+                <span><b>Volly</b> <span class="text-slate-400">(Tim)</span></span>
+              </li>
+            </ul>
+          </div>
+          <a href="#daftar" class="mt-6 block text-center text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">
+            Daftar Umum →
+          </a>
+        </div>
+
       </div>
     </section>
 
