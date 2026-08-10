@@ -3,347 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lomba Gebyar HUT RI ke-81 - SDIT AL-IQRA</title>
+  <title>Pendaftaran Lomba HUT RI ke-81 SDIT AL-IQRA</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandTeal: '#1F5A60',
-            brandGold: '#E3B333',
-            brandRed: '#DC2626'
-          }
-        }
-      }
+  <style>
+    :root {
+      --primary-teal: #1e5b5e;
+      --secondary-gold: #e0b034;
+      --accent-red: #ce1126;
     }
-  </script>
+    .bg-teal-iqra { background-color: var(--primary-teal); }
+    .text-teal-iqra { color: var(--primary-teal); }
+    .bg-gold-iqra { background-color: var(--secondary-gold); }
+    .border-gold-iqra { border-color: var(--secondary-gold); }
+  </style>
 </head>
-<body class="bg-slate-100 min-h-screen text-gray-800 pb-12">
+<body class="bg-slate-50 min-h-screen font-sans">
 
-  <!-- Header Banner dengan Kombinasi Warna Logo & Merah-Putih -->
-  <header class="bg-brandTeal text-white shadow-xl border-b-4 border-brandGold">
-    <div class="max-w-5xl mx-auto px-4 py-6 text-center flex flex-col items-center justify-center gap-2">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl">🇮🇩</span>
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-wider uppercase text-brandGold">SDIT AL-IQRA TIRTAMULYA</h1>
-        <span class="text-3xl">🇮🇩</span>
+  <!-- Header Banner -->
+  <header class="bg-teal-iqra text-white border-b-4 border-gold-iqra shadow-lg">
+    <div class="max-w-4xl mx-auto px-4 py-6 text-center">
+      <div class="inline-block bg-white p-2 rounded-full mb-3 shadow">
+        <!-- Badge HUT RI -->
+        <span class="bg-red-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">HUT RI Ke-81</span>
       </div>
-      <h2 class="text-lg md:text-xl font-bold text-white">Formulir Pendaftaran Lomba HUT RI Ke-81</h2>
-      <p class="text-xs md:text-sm text-emerald-100">Sistem Pendaftaran Real-Time & Control Kuota Rombel</p>
+      <h1 class="text-2xl md:text-4xl font-extrabold tracking-wide">SDIT AL-IQRA TIRTAMULYA</h1>
+      <p class="text-yellow-300 font-medium mt-1">Formulir Pendaftaran Semarak Lomba Kemerdekaan</p>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <!-- Container -->
+  <main class="max-w-2xl mx-auto p-4 my-6">
+    <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6 md:p-8">
+      
+      <!-- Alert Box -->
+      <div id="alertBox" class="hidden mb-6 p-4 rounded-lg text-sm font-semibold"></div>
 
-    <!-- Form Pendaftaran -->
-    <div class="lg:col-span-7 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-      <div class="bg-brandRed p-4 text-white font-bold flex items-center justify-between">
-        <span class="flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> Form Pendaftaran</span>
-        <span class="text-xs bg-white/20 px-2.5 py-1 rounded-full">HUT RI 81</span>
-      </div>
-
-      <form id="formPendaftaran" onsubmit="submitForm(event)" class="p-6 space-y-5">
+      <form id="registrationForm" onsubmit="handleSubmit(event)" class="space-y-5">
         
-        <!-- Pilihan Kelas & Fase Auto-Detect -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Pilih Fase & Rombel -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pilih Rombel / Kelas <span class="text-brandRed">*</span></label>
-            <select id="kelas" onchange="onKelasChange()" required class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
-              <option value="">-- Pilih Kelas --</option>
-              <optgroup label="Fase A">
-                <option value="1A">Kelas 1A</option><option value="1B">Kelas 1B</option>
-                <option value="2A">Kelas 2A</option><option value="2B">Kelas 2B</option>
-              </optgroup>
-              <optgroup label="Fase B">
-                <option value="3A">Kelas 3A</option><option value="3B">Kelas 3B</option>
-                <option value="4A">Kelas 4A</option><option value="4B">Kelas 4B</option>
-              </optgroup>
-              <optgroup label="Fase C">
-                <option value="5A">Kelas 5A</option><option value="5B">Kelas 5B</option>
-                <option value="6A">Kelas 6A</option><option value="6B">Kelas 6B</option>
-              </optgroup>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Pilih Fase</label>
+            <select id="faseSelect" onchange="handleFaseChange()" required class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-teal-600 outline-none">
+              <option value="">-- Pilih Fase --</option>
+              <option value="Fase A">Fase A (Kelas 1-2)</option>
+              <option value="Fase B">Fase B (Kelas 3-4)</option>
+              <option value="Fase C">Fase C (Kelas 5-6)</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Fase Terdeteksi</label>
-            <input type="text" id="faseDisplay" readonly placeholder="Otomatis" class="w-full p-3 bg-gray-100 border rounded-xl text-sm font-bold text-brandTeal">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Pilih Rombel / Kelas</label>
+            <select id="rombelSelect" required class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-teal-600 outline-none">
+              <option value="">-- Pilih Rombel --</option>
+            </select>
           </div>
         </div>
 
-        <!-- Pilihan Jenis Lomba -->
+        <!-- Pilih Lomba -->
         <div>
-          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Jenis Perlombaan <span class="text-brandRed">*</span></label>
-          <select id="lomba" onchange="renderDynamicInputs()" required disabled class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
-            <option value="">-- Pilih Kelas Terlebih Dahulu --</option>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Pilih Jenis Lomba</label>
+          <select id="lombaSelect" onchange="handleLombaChange()" required disabled class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-teal-600 outline-none bg-slate-100">
+            <option value="">-- Pilih Fase Terlebih Dahulu --</option>
           </select>
         </div>
 
-        <div id="infoLomba" class="hidden p-3 bg-amber-50 border-l-4 border-brandGold text-xs text-amber-900 rounded-r-xl"></div>
+        <!-- Dynamic Inputs (Tim / Individu) -->
+        <div id="dynamicFields" class="space-y-4 pt-2"></div>
 
-        <!-- Form Dinamis berdasarkan Jenis Lomba -->
-        <div id="dynamicInputs" class="space-y-4"></div>
-
-        <button type="submit" id="btnSubmit" class="w-full bg-brandTeal hover:bg-emerald-900 text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg flex items-center justify-center gap-2">
-          <i class="fa-solid fa-paper-plane text-brandGold"></i>
-          <span>Kirim Pendaftaran</span>
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition duration-200">
+          Daftarkan Peserta
         </button>
       </form>
     </div>
-
-    <!-- Panel Monitor Kuota Rombel -->
-    <div class="lg:col-span-5 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-fit">
-      <div class="bg-brandTeal p-4 text-white font-bold flex items-center justify-between border-b-2 border-brandGold">
-        <span class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-brandGold"></i> Monitor Kuota Rombel</span>
-        <span id="selectedKelasBadge" class="text-xs bg-brandGold text-gray-900 font-extrabold px-2.5 py-1 rounded-full">Pilih Kelas</span>
-      </div>
-
-      <div id="quotaPanel" class="p-4 space-y-3">
-        <p class="text-xs text-gray-400 text-center py-8">Pilih kelas pada form untuk melihat sisa kuota lomba rombel Anda secara langsung.</p>
-      </div>
-    </div>
-
   </main>
 
   <script>
-    // PASTEKAN URL WEB APP GAS ANDA DI SINI
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLDDxl2lvw9UnRp91X_It5RKNGYCe_TMQPykVmOpk1mB4nAr_FR7YZWtXGMytbPmCc/exec";
+    // **GANTI DENGAN URL DEPLOYMENT GAS ANDA**
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwjZuzw3VXus__vyWtwgh_WBZX_ON1HvBfESyHMEteyw2P1vhc_fvtHZA6I5iiArb9Y/exec";
 
-    const dataLomba = {
-      "makan_kerupuk": { nama: "Lomba Makan Kerupuk (Individu)", jenis: "Individu", max: 2, unit: "Peserta", fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 2 orang per rombel." },
-      "pensil_botol_ind": { nama: "Lomba Memasukkan Pensil ke Botol (Individu)", jenis: "Individu", max: 3, unit: "Peserta", fase: ["Fase A"], info: "Maksimal 3 orang per rombel." },
-      "mewarnai": { nama: "Lomba Mewarnai (Individu)", jenis: "Individu", max: 999, unit: "Peserta", fase: ["Fase A"], info: "Diikuti seluruh siswa Fase A." },
-      "pindah_bendera": { nama: "Lomba Memindahkan Bendera (Individu)", jenis: "Individu", max: 3, unit: "Peserta", fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 3 orang per rombel." },
-      "pensil_botol_tim": { nama: "Memasukkan Pensil ke Botol (Tim)", jenis: "Tim", max: 1, unit: "Tim", anggota: 4, fase: ["Fase B", "Fase C"], info: "Maksimal 1 tim per rombel (4 orang/tim)." },
-      "sedotan_botol_tim": { nama: "Memasukkan Sedotan ke Botol (Tim)", jenis: "Tim", max: 2, unit: "Tim", anggota: 5, fase: ["Fase B", "Fase C"], info: "Maksimal 2 tim per rombel (5 orang/tim)." },
-      "spons_air_tim": { nama: "Mengisi Botol dengan Air pakai Spons (Tim)", jenis: "Tim", max: 2, unit: "Tim", anggota: 5, fase: ["Fase A", "Fase B", "Fase C"], info: "Maksimal 2 tim per rombel (5 orang/tim)." }
+    const classOptions = {
+      'Fase A': ['Kelas 1A', 'Kelas 1B', 'Kelas 2A', 'Kelas 2B'],
+      'Fase B': ['Kelas 3A', 'Kelas 3B', 'Kelas 4A', 'Kelas 4B'],
+      'Fase C': ['Kelas 5A', 'Kelas 5B', 'Kelas 6A', 'Kelas 6B']
     };
 
-    let serverStats = {};
+    let masterLomba = [];
 
-    async function fetchStats() {
+    // Fetch Master Lomba saat Load
+    window.addEventListener('DOMContentLoaded', async () => {
       try {
-        const res = await fetch(`${SCRIPT_URL}?action=getStats`, { method: "GET", redirect: "follow" });
-        const json = await res.json();
-        if (json.result === "success") {
-          serverStats = json.stats || {};
-          updateQuotaPanel();
-          updateLombaOptions();
-        }
-      } catch (e) {
-        console.error("Gagal sinkronisasi kuota:", e);
+        const res = await fetch(`${GAS_WEB_APP_URL}?action=getLomba`);
+        masterLomba = await res.json();
+      } catch (err) {
+        showAlert('Gagal memuat data lomba. Pastikan URL GAS benar.', 'error');
       }
-    }
+    });
 
-    function getFase(kelas) {
-      if (["1A", "1B", "2A", "2B"].includes(kelas)) return "Fase A";
-      if (["3A", "3B", "4A", "4B"].includes(kelas)) return "Fase B";
-      if (["5A", "5B", "6A", "6B"].includes(kelas)) return "Fase C";
-      return "";
-    }
-
-    async function onKelasChange() {
-      const kelas = document.getElementById("kelas").value;
-      const fase = getFase(kelas);
-      document.getElementById("faseDisplay").value = fase;
-      document.getElementById("selectedKelasBadge").textContent = kelas ? `Kelas ${kelas}` : 'Pilih Kelas';
-
-      if (kelas) {
-        updateLombaOptions();
-        await fetchStats();
-      } else {
-        document.getElementById("lomba").disabled = true;
-        document.getElementById("lomba").innerHTML = '<option value="">-- Pilih Kelas Terlebih Dahulu --</option>';
-        document.getElementById("dynamicInputs").innerHTML = '';
-        document.getElementById("infoLomba").classList.add("hidden");
-        updateQuotaPanel();
-      }
-    }
-
-    function updateLombaOptions() {
-      const kelas = document.getElementById("kelas").value;
-      const fase = getFase(kelas);
-      const lombaSelect = document.getElementById("lomba");
+    function handleFaseChange() {
+      const fase = document.getElementById('faseSelect').value;
+      const rombelSelect = document.getElementById('rombelSelect');
+      const lombaSelect = document.getElementById('lombaSelect');
       
-      lombaSelect.innerHTML = '<option value="">-- Pilih Jenis Lomba --</option>';
-      document.getElementById("dynamicInputs").innerHTML = '';
-      document.getElementById("infoLomba").classList.add("hidden");
+      rombelSelect.innerHTML = '<option value="">-- Pilih Rombel --</option>';
+      lombaSelect.innerHTML = '<option value="">-- Pilih Lomba --</option>';
+      document.getElementById('dynamicFields').innerHTML = '';
 
-      if (!fase) return;
+      if (!fase) {
+        lombaSelect.disabled = true;
+        lombaSelect.classList.add('bg-slate-100');
+        return;
+      }
+
+      // Populate Rombel
+      classOptions[fase].forEach(r => {
+        rombelSelect.innerHTML += `<option value="${r}">${r}</option>`;
+      });
+
+      // Filter & Populate Lomba berdasarkan Fase
+      const availableLomba = masterLomba.filter(l => l.fase.includes(fase));
+      availableLomba.forEach(l => {
+        lombaSelect.innerHTML += `<option value="${l.id}">${l.nama} (${l.kategori})</option>`;
+      });
+
       lombaSelect.disabled = false;
-      
-      for (const [key, value] of Object.entries(dataLomba)) {
-        if (value.fase.includes(fase)) {
-          const filled = serverStats[`${kelas}_${value.nama}`] || 0;
-          const isFull = filled >= value.max;
-
-          const option = document.createElement("option");
-          option.value = key;
-          option.textContent = `${value.nama} ${isFull ? '(PENUH)' : ''}`;
-          if (isFull) {
-            option.disabled = true;
-            option.classList.add("text-brandRed", "bg-gray-100");
-          }
-          lombaSelect.appendChild(option);
-        }
-      }
+      lombaSelect.classList.remove('bg-slate-100');
     }
 
-    function updateQuotaPanel() {
-      const kelas = document.getElementById("kelas").value;
-      const fase = getFase(kelas);
-      const panel = document.getElementById("quotaPanel");
+    function handleLombaChange() {
+      const lombaId = document.getElementById('lombaSelect').value;
+      const dynamicFields = document.getElementById('dynamicFields');
+      dynamicFields.innerHTML = '';
 
-      if (!kelas) {
-        panel.innerHTML = `<p class="text-xs text-gray-400 text-center py-8">Pilih kelas pada form untuk melihat sisa kuota lomba rombel Anda secara langsung.</p>`;
-        return;
-      }
+      if (!lombaId) return;
 
-      let html = '';
-      for (const [key, value] of Object.entries(dataLomba)) {
-        if (value.fase.includes(fase)) {
-          const filled = serverStats[`${kelas}_${value.nama}`] || 0;
-          const max = value.max;
-          const isUnlimited = max >= 999;
-          const isFull = filled >= max;
+      const selectedLomba = masterLomba.find(l => l.id === lombaId);
 
-          html += `
-            <div class="p-3 rounded-xl border ${isFull ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-gray-200'}">
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-xs font-bold text-gray-800">${value.nama}</span>
-                ${isFull ? 
-                  `<span class="text-[10px] bg-brandRed text-white font-bold px-2 py-0.5 rounded-full">PENUH</span>` : 
-                  `<span class="text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">TERSEDIA</span>`
-                }
-              </div>
-              <div class="flex justify-between items-center text-xs text-gray-500">
-                <span>Terdaftar: <b class="${isFull ? 'text-brandRed' : 'text-brandTeal'}">${filled}</b> ${value.unit}</span>
-                <span>Kuota Rombel: <b>${isUnlimited ? 'Tanpa Batas' : max + ' ' + value.unit}</b></span>
-              </div>
-            </div>
-          `;
-        }
-      }
-      panel.innerHTML = html;
-    }
-
-    function renderDynamicInputs() {
-      const key = document.getElementById("lomba").value;
-      const container = document.getElementById("dynamicInputs");
-      const infoBox = document.getElementById("infoLomba");
-      container.innerHTML = '';
-
-      if (!key) {
-        infoBox.classList.add("hidden");
-        return;
-      }
-
-      const lomba = dataLomba[key];
-      infoBox.textContent = "Aturan Rombel: " + lomba.info;
-      infoBox.classList.remove("hidden");
-
-      if (lomba.jenis === "Individu") {
-        container.innerHTML = `
-          <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Peserta <span class="text-brandRed">*</span></label>
-            <input type="text" name="namaUtama" required placeholder="Masukkan Nama Lengkap Peserta" class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none">
-          </div>
-        `;
-      } else {
+      if (selectedLomba.isTim) {
         let inputs = `
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Tim / Kelompok <span class="text-brandRed">*</span></label>
-            <input type="text" name="namaUtama" required placeholder="Contoh: Tim Rajawali / Kelompok 1" class="w-full p-3 border rounded-xl text-sm focus:ring-2 focus:ring-brandTeal outline-none mb-3">
+            <label class="block text-sm font-semibold text-slate-700">Nama Tim / Kelompok</label>
+            <input type="text" id="namaTim" required class="w-full p-2.5 border rounded-lg mt-1 outline-none focus:ring-2 focus:ring-teal-600" placeholder="Contoh: Tim Garuda 1">
           </div>
-          <div class="p-4 bg-slate-50 border border-gray-200 rounded-xl space-y-3">
-            <p class="text-xs font-bold text-brandTeal uppercase">Daftar Anggota Tim (${lomba.anggota} Orang):</p>
-        `;
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Nama Anggota Tim (Maks ${selectedLomba.maxPerTim} Orang)</label>`;
         
-        for (let i = 1; i <= lomba.anggota; i++) {
-          inputs += `
-            <div>
-              <input type="text" name="anggotaInput" required placeholder="Nama Anggota ${i}" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-brandTeal outline-none">
-            </div>
-          `;
+        for (let i = 1; i <= selectedLomba.maxPerTim; i++) {
+          inputs += `<input type="text" class="anggotaInput w-full p-2 border rounded-lg text-sm" placeholder="Nama Anggota ${i}" ${i === 1 ? 'required' : ''}>`;
         }
         inputs += `</div>`;
-        container.innerHTML = inputs;
+        dynamicFields.innerHTML = inputs;
+      } else {
+        dynamicFields.innerHTML = `
+          <div>
+            <label class="block text-sm font-semibold text-slate-700">Nama Lengkap Peserta</label>
+            <input type="text" id="namaPeserta" required class="w-full p-2.5 border rounded-lg mt-1 outline-none focus:ring-2 focus:ring-teal-600" placeholder="Masukkan nama siswa">
+          </div>`;
       }
     }
 
-    async function submitForm(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
-      const btn = document.getElementById("btnSubmit");
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Memproses...`;
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Memproses...';
 
-      const kelas = document.getElementById("kelas").value;
-      const fase = document.getElementById("faseDisplay").value;
-      const lombaKey = document.getElementById("lomba").value;
-      const lomba = dataLomba[lombaKey];
+      const fase = document.getElementById('faseSelect').value;
+      const rombel = document.getElementById('rombelSelect').value;
+      const lombaId = document.getElementById('lombaSelect').value;
+      const selectedLomba = masterLomba.find(l => l.id === lombaId);
 
-      const namaUtama = document.querySelector('[name="namaUtama"]').value;
-      const anggotaElements = document.querySelectorAll('[name="anggotaInput"]');
-      let anggotaList = [];
-      anggotaElements.forEach(input => anggotaList.push(input.value));
+      let payload = { fase, rombel, lombaId };
 
-      const payload = {
-        kelas: kelas,
-        fase: fase,
-        lomba: lomba.nama,
-        kategori: lomba.jenis,
-        namaUtama: namaUtama,
-        anggota: anggotaList,
-        catatan: "-"
-      };
+      if (selectedLomba.isTim) {
+        payload.namaTim = document.getElementById('namaTim').value;
+        payload.anggota = Array.from(document.querySelectorAll('.anggotaInput'))
+                               .map(i => i.value.trim())
+                               .filter(val => val !== '');
+      } else {
+        payload.namaPeserta = document.getElementById('namaPeserta').value;
+      }
 
       try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
+        const res = await fetch(GAS_WEB_APP_URL, {
+          method: 'POST',
           body: JSON.stringify(payload)
         });
+        const result = await res.json();
 
-        const json = await res.json();
-
-        if (json.result === "success") {
-          Swal.fire({
-            icon: 'success',
-            title: 'Pendaftaran Berhasil!',
-            text: json.message,
-            confirmButtonColor: '#1F5A60'
-          });
-
-          document.getElementById("formPendaftaran").reset();
-          document.getElementById("lomba").disabled = true;
-          document.getElementById("dynamicInputs").innerHTML = '';
-          document.getElementById("infoLomba").classList.add("hidden");
-          
-          await onKelasChange();
+        if (result.status === 'success') {
+          showAlert(result.message, 'success');
+          document.getElementById('registrationForm').reset();
+          document.getElementById('dynamicFields').innerHTML = '';
+        } else if (result.status === 'full') {
+          showAlert(result.message, 'warning');
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Pendaftaran Ditolak!',
-            text: json.message,
-            confirmButtonColor: '#DC2626'
-          });
-          await onKelasChange();
+          showAlert(result.message, 'error');
         }
-
       } catch (err) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Gagal!',
-          text: 'Koneksi ke server terganggu. Silakan coba lagi.',
-          confirmButtonColor: '#DC2626'
-        });
+        showAlert('Terjadi kesalahan jaringan.', 'error');
       } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-paper-plane text-brandGold"></i> <span>Kirim Pendaftaran</span>`;
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Daftarkan Peserta';
       }
+    }
+
+    function showAlert(msg, type) {
+      const box = document.getElementById('alertBox');
+      box.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-yellow-100', 'text-yellow-800');
+      
+      if (type === 'success') box.classList.add('bg-green-100', 'text-green-700');
+      else if (type === 'warning') box.classList.add('bg-yellow-100', 'text-yellow-800');
+      else box.classList.add('bg-red-100', 'text-red-700');
+
+      box.innerText = msg;
     }
   </script>
 </body>
